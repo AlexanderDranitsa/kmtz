@@ -4,13 +4,15 @@
 
 wget https://psv4.userapi.com/c848028/u18270521/docs/d18/1a434a7ec7f9/729088.jpg -O ~/Downloads/wp.jpg
 
-packages="i3 feh sudo meld smartgit code git krusader gcc sublime-text virtualbox x2goserver x2goserver-xsession"
-repos="ppa:x2go/stable ppa:eugenesan/ppa"
+sudo apt install curl
+
+packages="xbacklight i3 feh sudo meld smartgit code git krusader gcc sublime-text virtualbox"
+repos="ppa:eugenesan/ppa ppa:webupd8team/java"
 
 # pre_commands:
 for repo in $repos
 do
-add-apt-repository -y $repo
+sudo add-apt-repository -y $repo
 done
 
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -19,12 +21,14 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 
-apt-get update
+sudo apt-get update
 
 for i in $packages
 do
-echo apt install -y $i
+sudo apt install -y $i
 done
+
+sudo apt-get -y install oracle-java8-installer
 
 #configuring i3
 
@@ -217,7 +221,7 @@ binding_mode #2f343a #900000 #ffffff
 exec feh --bg-scale /home/dranitsaal/Downloads/wp.jpg
 
 exec synclient VertScrollDelta=-79
-exec synclient HorizScrollDelta=-79" > ~/.config/i3/config
+exec synclient HorizScrollDelta=-79" > ~/.config/i3/config1
 
 echo "# github.com/rafi i3status config
 
@@ -348,7 +352,7 @@ status_unk = \"? UNK\"
 status_full = \"FULL\"
 path = \"/sys/class/power_supply/BAT%d/uevent\"
 low_threshold = 10
-}" > /etc/i3status.conf
+}" > /etc/i3status.conf1
 
 echo "#!/usr/bin/env python3
 
