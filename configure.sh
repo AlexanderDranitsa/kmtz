@@ -2,7 +2,7 @@
 
 # run with 'sudo'
 
-#wget https://psv4.userapi.com/c848028/u18270521/docs/d18/1a434a7ec7f9/729088.jpg -O ~/Downloads/wp.jpg
+wget https://psv4.userapi.com/c848028/u18270521/docs/d18/1a434a7ec7f9/729088.jpg -O ~/Downloads/wp.jpg
 
 packages="i3 feh sudo meld smartgit code git krusader gcc sublime-text virtualbox x2goserver x2goserver-xsession"
 repos="ppa:x2go/stable ppa:eugenesan/ppa"
