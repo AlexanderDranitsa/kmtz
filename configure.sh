@@ -10,7 +10,7 @@ repos="ppa:x2go/stable ppa:eugenesan/ppa"
 # pre_commands:
 for repo in $repos
 do
-add-apt-repository $repo
+add-apt-repository -y $repo
 done
 
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -23,7 +23,7 @@ apt-get update
 
 for i in $packages
 do
-echo apt install $i
+echo apt install -y $i
 done
 
 #configuring i3
