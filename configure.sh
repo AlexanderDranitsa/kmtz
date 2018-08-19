@@ -235,7 +235,10 @@ bar {
 exec feh --bg-scale /home/dranitsaal/Downloads/wp.jpg
 
 exec synclient VertScrollDelta=-79
-exec synclient HorizScrollDelta=-79" > ~/.config/i3/config
+exec synclient HorizScrollDelta=-79
+
+for_window [class="^.*"] border pixel 0
+new_window normal 0 px" > ~/.config/i3/config
 
 sudo touch /etc/i3status.conf
 sudo echo "
