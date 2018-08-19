@@ -4,7 +4,12 @@
 
 wget https://psv4.userapi.com/c848028/u18270521/docs/d18/1a434a7ec7f9/729088.jpg -O ~/Downloads/wp.jpg
 
-#sudo apt install curl
+wget https://psv4.userapi.com/c848232/u18270521/docs/d14/e363c0d02f9f/wallpaper_wiki-Free-HD-Dark-Photos-1920x1080-PIC-WPD009331.jpg -O ~/Downloads/ls.jpg
+
+mogrify -format png Downloads/ls.jpg
+rm ~/Downloads/ls.jpg
+
+sudo apt install curl
 
 packages="xserver-xorg-input-synaptics gparted iverilog xbacklight i3 feh sudo meld smartgit code git krusader gcc sublime-text virtualbox"
 repos="ppa:eugenesan/ppa ppa:webupd8team/java"
@@ -23,9 +28,9 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 
 sudo apt-get update
 
-for i in $packages
+for package in $packages
 do
-sudo apt install -y $i
+sudo apt install -y $package
 done
 
 sudo apt-get -y install oracle-java8-installer
@@ -165,12 +170,20 @@ bindsym XF86KbdBrightnessDown exec python3 /usr/local/bin/kb-light.py -
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
+
+# layouts
+bindcode \$mod+Shift+34 exec \"setxkbmap -layout 'us'\"
+bindcode \$mod+Shift+35 exec \"setxkbmap -layout 'ru'\"
+
 # reload the configuration file
 bindsym \$mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym \$mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym \$mod+Shift+e exec \"i3-nagbar -t warning -m 'You pressed the exit shortcut. Do youreally want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'\"
+
+bindsym \$mod+Shift+s exec \"i3lock -i /home/dranitsaal/Downloads/ls.png && systemctl suspend\"
+bindsym \$mod+Shift+b exec \"i3lock -i /home/dranitsaal/Downloads/ls.png -p default -n\"
 
 # resize window (you can also use the mouse for that)
 mode \"resize\" {
@@ -205,26 +218,24 @@ bar {
 	status_command i3status
 	position top
 
-colors {
-	background #000000
-	statusline #ffffff
-	separator #999999
+	colors {
+		background #000000
+		statusline #ffffff
+		separator #999999
 
-	focused_workspace #4c7899 #285577 #ffffff
-	active_workspace #333333 #5f676a #ffffff
-	inactive_workspace #333333 #222222 #888888
-	urgent_workspace #2f343a #900000 #ffffff
-	binding_mode #2f343a #900000 #ffffff
-}
+		focused_workspace #4c7899 #285577 #ffffff
+		active_workspace #333333 #5f676a #ffffff
+		inactive_workspace #333333 #222222 #888888
+		urgent_workspace #2f343a #900000 #ffffff
+		binding_mode #2f343a #900000 #ffffff
+	}
 
 }
 
 exec feh --bg-scale /home/dranitsaal/Downloads/wp.jpg
 
 exec synclient VertScrollDelta=-79
-exec synclient HorizScrollDelta=-79
-
-exec_always \"setxkbmap -model pc104 -layout us,ru -variant ,, -option grp:alt_shift_toggle\"" > ~/.config/i3/config
+exec synclient HorizScrollDelta=-79" > ~/.config/i3/config
 
 sudo touch /etc/i3status.conf
 sudo echo "
@@ -402,3 +413,5 @@ sudo echo "Section \"Device\"
     Driver \"intel\"
     Option \"Backlight\" \"intel_backlight\"
 EndSection" > /etc/X11/xorg.conf
+
+sudo systemctl disable bluetooth.service
